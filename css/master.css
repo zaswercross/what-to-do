@@ -49,3 +49,6 @@ input {
 input[type=checkbox]:checked + span {
   text-decoration: line-through;
 }
+.modal-close.waves-effect.waves-green.btn-flat.waves-light.red {
+  color: white;
+}

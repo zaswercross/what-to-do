@@ -1,4 +1,5 @@
 _createCollectionList();
+$('.modal').modal();
 $(".formLista").submit(function(e){
 	e.preventDefault();
 	let newDo = $("#newDo").val();
@@ -19,7 +20,7 @@ $(".formLista").submit(function(e){
 
 });
 
-$(".collection").on('click','.secondary-content',function(){
+$(".btnEliminar").click(function(){
 	let idList = $(this).attr("data-id")
 	let list = JSON.parse(localStorage.getItem("listDo"));
 	let posicion = 0;
@@ -27,23 +28,18 @@ $(".collection").on('click','.secondary-content',function(){
 		if(valor.id==idList)
 			posicion = indice;
 	});
-	
-	swal({
-		title: "¿Estás seguro de eliminar está tarea?",
-		icon: "warning",
-		buttons: true,
-		dangerMode: true,
-	})
-	.then((willDelete) => {
-		if (willDelete) {
-			list.splice(posicion,1);
+
+
+	list.splice(posicion,1);
 			localStorage.setItem("listDo",JSON.stringify(list));
 			$(".collection-item-"+idList).addClass("fadeOutRightBig animated");
 			setTimeout(function(){$(".collection-item-"+idList).remove();},800);
 			M.toast({html: `¡Listo! ¡Se eliminó esa tarea!`})
-		}
-	  });
+	
+});
 
+$(".collection").on('click','.secondary-content',function(){
+	$(".btnEliminar").attr("data-id",$(this).attr("data-id"));
 });
 
 
@@ -77,7 +73,7 @@ function _createCollectionList(){
 				
 				collectionList += `<li class="collection-item collection-item-${value.id}">
 										<div>
-											<a href="#!" data-id="${value.id}" class="secondary-content">
+											<a href="#modal1" data-id="${value.id}" class="modal-trigger secondary-content">
 												<i class="material-icons">delete</i>
 											</a>
 											<p>
@@ -91,7 +87,7 @@ function _createCollectionList(){
 			}else{
 				collectionList += `<li class="collection-item collection-item-${value.id}">
 										<div>
-											<a href="#!" data-id="${value.id}" class="secondary-content"><i class="material-icons">delete</i></a>
+											<a href="#modal1" data-id="${value.id}" class="modal-trigger secondary-content"><i class="material-icons">delete</i></a>
 											<p>
 													<label for="inputCheckbox${value.id}">
 													<input type="checkbox" id="inputCheckbox${value.id}" value="${value.id}" />
