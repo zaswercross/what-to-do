@@ -38,7 +38,8 @@ $(".collection").on('click','.secondary-content',function(){
 		if (willDelete) {
 			list.splice(posicion,1);
 			localStorage.setItem("listDo",JSON.stringify(list));
-			$(".collection-item-"+idList).remove();
+			$(".collection-item-"+idList).addClass("fadeOutRightBig animated");
+			setTimeout(function(){$(".collection-item-"+idList).remove();},800);
 			M.toast({html: `¡Listo! ¡Se eliminó esa tarea!`})
 		}
 	  });
