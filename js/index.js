@@ -32,7 +32,7 @@ $(".btnEliminar").click(function(){
 
 	list.splice(posicion,1);
 			localStorage.setItem("listDo",JSON.stringify(list));
-			$(".collection-item-"+idList).addClass("fadeOutRightBig animated");
+			$(".collection-item-"+idList).addClass("fadeOutRight animated");
 			setTimeout(function(){$(".collection-item-"+idList).remove();},800);
 			M.toast({html: `¡Listo! ¡Se eliminó esa tarea!`})
 	
